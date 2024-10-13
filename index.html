@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Scrolling Quotes</title>
+    <style>
+        body {
+            background-color: clear;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .neon-border-wrapper {
+            border: 3px solid #8A2BE2;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 
+                0 0 10px #8A2BE2, 
+                0 0 20px #9400D3, 
+                0 0 30px #FF00FF, 
+                0 0 40px #FF00FF;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            will-change: transform;
+        }
+
+        .scrolling-content {
+            display: flex;
+            animation: scroll-left 60s linear infinite;
+            width: 300%; /* Adjust width to accommodate repeated text */
+            will-change: transform;
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            font-family: 'Arial', sans-serif;
+            font-size: 20px;
+            color: #DA70D6;
+            text-shadow: 
+                0 0 5px #DA70D6, 
+                0 0 10px #BA55D3, 
+                0 0 20px #9400D3;
+            padding-right: 50px;
+        }
+
+        @keyframes scroll-left {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neon-border-wrapper">
+        <div class="scrolling-content" id="scrolling-content">
+            <span class="scrolling-text" id="live-info-1"></span>
+            <span class="scrolling-text" id="live-info-2"></span>
+            <span class="scrolling-text" id="live-info-3"></span>
+            <span class="scrolling-text" id="live-info-4"></span>
+            <span class="scrolling-text" id="live-info-5"></span>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            "Productivity is never an accident.",
+            "Success usually comes to those who are too busy to be looking for it.",
+            "Do not wait for the perfect moment, take the moment and make it perfect.",
+            "The key to success is to focus on goals, not obstacles.",
+            "Work hard in silence, let your success make the noise.",
+            "The way to get started is to quit talking and begin doing."
+        ];
+        let quoteIndex = 0;
+
+        function updateLiveInfo() {
+            // Cycle through quotes
+            const currentQuote = quotes[quoteIndex];
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+
+            // Set the text to only display the current quote
+            const liveText = `"${currentQuote}"`;
+            
+            // Update all spans with the same live text to create a seamless repeat
+            document.getElementById('live-info-1').innerText = liveText;
+            document.getElementById('live-info-2').innerText = liveText;
+            document.getElementById('live-info-3').innerText = liveText;
+            document.getElementById('live-info-4').innerText = liveText;
+            document.getElementById('live-info-5').innerText = liveText;
+        }
+
+        setInterval(updateLiveInfo, 5000); // Update every 5 seconds
+        updateLiveInfo(); // Initial call to display immediately
+    </script>
+</body>
+</html>
